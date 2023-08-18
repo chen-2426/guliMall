@@ -35,3 +35,5 @@ build/
 **/mvnw
 **/HELP.md
 **/.mvn/
+**/.properties
+**/application.yml
