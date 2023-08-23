@@ -32,6 +32,7 @@
         <spring.cloud.alibaba.version>2021.0.4.0</spring.cloud.alibaba.version>
         <alibaba.nacos.version>2.2.0.RELEASE</alibaba.nacos.version>
         <openfeign.version>2.2.5.RELEASE</openfeign.version>
+        <oss.version>1.0.0</oss.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -76,6 +77,11 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>aliyun-oss-spring-boot-starter</artifactId>
+                <version>${oss.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

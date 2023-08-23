@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import com.chen.gulimall.product.DTO.CategoryDTO;
+import com.chen.gulimall.product.VO.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.chen.gulimall.product.entity.CategoryEntity;
@@ -33,17 +34,17 @@ public class CategoryController {
      * 樹形列表
      */
     @GetMapping("/list/tree")
-    //@RequiresPermissions("product:category:list")
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:list")
     public R listwithTree(){
-        List<CategoryDTO> categoryDTOS = categoryService.listWithTree();
-        return R.ok().put("data", categoryDTOS);
+        List<CategoryVO> categoryVOS = categoryService.listWithTree();
+        return R.ok().put("data", categoryVOS);
     }
 
     /**
      * 列表
      */
     @GetMapping("/list")
-    //@RequiresPermissions("product:category:list")
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = categoryService.queryPage(params);
 
@@ -55,7 +56,7 @@ public class CategoryController {
      * 信息
      */
     @GetMapping("/info/{catId}")
-    //@RequiresPermissions("product:category:info")
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:info")
     public R info(@PathVariable("catId") Long catId){
 		CategoryEntity category = categoryService.getById(catId);
 
@@ -66,7 +67,7 @@ public class CategoryController {
      * 保存
      */
     @PostMapping("/save")
-    //@RequiresPermissions("product:category:save")
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:save")
     public R save(@RequestBody CategoryEntity category){
 		categoryService.save(category);
 
@@ -77,7 +78,7 @@ public class CategoryController {
      * 修改sort
      */
     @PutMapping("/update/sort")
-    //@RequiresPermissions("product:category:update")
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:update")
     public R update(@RequestBody CategoryEntity[] category){
         categoryService.updateBatchById(Arrays.asList(category));
 
@@ -88,9 +89,10 @@ public class CategoryController {
      * 修改
      */
     @PutMapping("/update")
-    //@RequiresPermissions("product:category:update")
+    @Transactional
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:update")
     public R update(@RequestBody CategoryEntity category){
-		categoryService.updateById(category);
+		categoryService.updateCascade(category);
 
         return R.ok();
     }
@@ -99,9 +101,9 @@ public class CategoryController {
      * 删除
      */
     @DeleteMapping("/delete")
-    //@RequiresPermissions("product:category:delete")
+    //@RequiresPermissions("com.chen.gulimail.product.com:category:delete")
     public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
+//		categoryService.removeByIds(Arrays.asList(catIds));
         categoryService.removeMenuByIds(Arrays.asList(catIds));
         return R.ok();
     }

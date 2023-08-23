@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.chen.gulimall.product.VO.AttrRespVO;
+import com.chen.gulimall.product.VO.AttrVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,32 +37,39 @@ public class AttrController {
      * 列表
      */
     @RequestMapping("/list")
-    //@RequiresPermissions("product:attr:list")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrService.queryPage(params);
 
         return R.ok().put("page", page);
     }
-
+    @RequestMapping("/{type}/list/{catelogId}")
+    public R listCategrorAttrs(@PathVariable("catelogId") Long catelogId,
+                               @RequestParam Map<String, Object> params,
+                               @PathVariable("type")String type){
+        PageUtils page = attrService.queryBaseAttrPage(catelogId,params,type);
+        return R.ok().put("page", page);
+    }
 
     /**
      * 信息
      */
     @RequestMapping("/info/{attrId}")
-    //@RequiresPermissions("product:attr:info")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:info")
     public R info(@PathVariable("attrId") Long attrId){
-		AttrEntity attr = attrService.getById(attrId);
+		AttrRespVO attr = attrService.getAttrInfo(attrId);
 
         return R.ok().put("attr", attr);
     }
+
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("product:attr:save")
-    public R save(@RequestBody AttrEntity attr){
-		attrService.save(attr);
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:save")
+    public R save(@RequestBody AttrVO attr){
+		attrService.saveAttr(attr);
 
         return R.ok();
     }
@@ -69,9 +78,9 @@ public class AttrController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:attr:update")
-    public R update(@RequestBody AttrEntity attr){
-		attrService.updateById(attr);
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:update")
+    public R update(@RequestBody AttrVO attr){
+		attrService.updateAttr(attr);
 
         return R.ok();
     }
@@ -80,7 +89,7 @@ public class AttrController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:attr:delete")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:delete")
     public R delete(@RequestBody Long[] attrIds){
 		attrService.removeByIds(Arrays.asList(attrIds));
 

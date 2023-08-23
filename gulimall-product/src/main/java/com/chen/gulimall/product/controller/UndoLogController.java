@@ -35,7 +35,7 @@ public class UndoLogController {
      * 列表
      */
     @RequestMapping("/list")
-    //@RequiresPermissions("product:undolog:list")
+    //@RequiresPermissions("com.chen.gulimail.product.com:undolog:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = undoLogService.queryPage(params);
 
@@ -47,7 +47,7 @@ public class UndoLogController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    //@RequiresPermissions("product:undolog:info")
+    //@RequiresPermissions("com.chen.gulimail.product.com:undolog:info")
     public R info(@PathVariable("id") Long id){
 		UndoLogEntity undoLog = undoLogService.getById(id);
 
@@ -58,7 +58,7 @@ public class UndoLogController {
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("product:undolog:save")
+    //@RequiresPermissions("com.chen.gulimail.product.com:undolog:save")
     public R save(@RequestBody UndoLogEntity undoLog){
 		undoLogService.save(undoLog);
 
@@ -69,7 +69,7 @@ public class UndoLogController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:undolog:update")
+    //@RequiresPermissions("com.chen.gulimail.product.com:undolog:update")
     public R update(@RequestBody UndoLogEntity undoLog){
 		undoLogService.updateById(undoLog);
 
@@ -80,7 +80,7 @@ public class UndoLogController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:undolog:delete")
+    //@RequiresPermissions("com.chen.gulimail.product.com:undolog:delete")
     public R delete(@RequestBody Long[] ids){
 		undoLogService.removeByIds(Arrays.asList(ids));
 

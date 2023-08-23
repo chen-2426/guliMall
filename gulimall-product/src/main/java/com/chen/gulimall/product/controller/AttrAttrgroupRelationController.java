@@ -38,7 +38,7 @@ public class AttrAttrgroupRelationController {
      * 列表
      */
     @RequestMapping("/list")
-    //@RequiresPermissions("product:attrattrgrouprelation:list")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attrattrgrouprelation:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrAttrgroupRelationService.queryPage(params);
 
@@ -50,7 +50,7 @@ public class AttrAttrgroupRelationController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    //@RequiresPermissions("product:attrattrgrouprelation:info")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attrattrgrouprelation:info")
     public R info(@PathVariable("id") Long id){
 		AttrAttrgroupRelationEntity attrAttrgroupRelation = attrAttrgroupRelationService.getById(id);
 
@@ -61,7 +61,7 @@ public class AttrAttrgroupRelationController {
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("product:attrattrgrouprelation:save")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attrattrgrouprelation:save")
     public R save(@RequestBody AttrAttrgroupRelationEntity attrAttrgroupRelation){
 		attrAttrgroupRelationService.save(attrAttrgroupRelation);
 
@@ -72,7 +72,7 @@ public class AttrAttrgroupRelationController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:attrattrgrouprelation:update")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attrattrgrouprelation:update")
     public R update(@RequestBody AttrAttrgroupRelationEntity attrAttrgroupRelation){
 		attrAttrgroupRelationService.updateById(attrAttrgroupRelation);
 
@@ -83,7 +83,7 @@ public class AttrAttrgroupRelationController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:attrattrgrouprelation:delete")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attrattrgrouprelation:delete")
     public R delete(@RequestBody Long[] ids){
 		attrAttrgroupRelationService.removeByIds(Arrays.asList(ids));
 

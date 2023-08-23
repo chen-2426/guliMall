@@ -9,7 +9,7 @@
 package io.renren.common.validator.group;
 
 /**
- * 更新数据 Group
+ * 更新数据 group
  *
  * @author Mark sunlightcs@gmail.com
  */

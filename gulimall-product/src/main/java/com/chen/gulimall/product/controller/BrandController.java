@@ -1,10 +1,15 @@
 package com.chen.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.chen.gulimall.base.group.updateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,7 @@ import com.chen.gulimall.product.service.BrandService;
 import com.chen.gulimall.base.utils.PageUtils;
 import com.chen.gulimall.base.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -35,10 +41,9 @@ public class BrandController {
      * 列表
      */
     @RequestMapping("/list")
-    //@RequiresPermissions("product:brand:list")
+    //@RequiresPermissions("com.chen.gulimail.product.com:brand:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = brandService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 
@@ -47,7 +52,7 @@ public class BrandController {
      * 信息
      */
     @RequestMapping("/info/{brandId}")
-    //@RequiresPermissions("product:brand:info")
+    //@RequiresPermissions("com.chen.gulimail.product.com:brand:info")
     public R info(@PathVariable("brandId") Long brandId){
 		BrandEntity brand = brandService.getById(brandId);
 
@@ -58,9 +63,20 @@ public class BrandController {
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("product:brand:save")
-    public R save(@RequestBody BrandEntity brand){
-		brandService.save(brand);
+    //@RequiresPermissions("com.chen.gulimail.product.com:brand:save")
+    //@Valid用于开启数据校验（来自javax.validation)
+    //@Validated用于开启数据分组校验（来自springframework.validation)
+    public R save(@Validated(updateGroup.class) @RequestBody BrandEntity brand/**, BindingResult result**/){ //BindingResult用于封装校验结果
+//		if(result.hasErrors()){
+//            Map<String, String> map = new HashMap<>();
+//            result.getFieldErrors().forEach((item) ->{
+//                String defaultMessage = item.getDefaultMessage();
+//                String field = item.getField();
+//                map.put(field,defaultMessage);
+//            });
+//            return R.error(400,"提交的信息不合法").put("data",map);
+//        }
+        brandService.save(brand);
 
         return R.ok();
     }
@@ -69,9 +85,10 @@ public class BrandController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:brand:update")
+    @Transactional
+    //@RequiresPermissions("com.chen.gulimail.product.com:brand:update")
     public R update(@RequestBody BrandEntity brand){
-		brandService.updateById(brand);
+		brandService.updateDetail(brand);
 
         return R.ok();
     }
@@ -80,7 +97,7 @@ public class BrandController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:brand:delete")
+    //@RequiresPermissions("com.chen.gulimail.product.com:brand:delete")
     public R delete(@RequestBody Long[] brandIds){
 		brandService.removeByIds(Arrays.asList(brandIds));
 
