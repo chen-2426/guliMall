@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.chen.gulimall.base.TO.SkuReductionTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,17 @@ import com.chen.gulimall.base.utils.R;
 public class SkuFullReductionController {
     @Autowired
     private SkuFullReductionService skuFullReductionService;
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/saveinfo")
+    //@RequiresPermissions("coupon:skufullreduction:list")
+    public R saveInfo(@RequestBody SkuReductionTo skuReductionTo){
+
+        skuFullReductionService.saveSkuReduction(skuReductionTo);
+        return R.ok();
+    }
 
     /**
      * 列表
