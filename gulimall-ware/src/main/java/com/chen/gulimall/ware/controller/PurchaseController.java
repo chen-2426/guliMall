@@ -1,9 +1,13 @@
 package com.chen.gulimall.ware.controller;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.chen.gulimall.ware.VO.DoneVo;
+import com.chen.gulimall.ware.VO.MergeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +34,54 @@ import com.chen.gulimall.base.utils.R;
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
+
+    /**
+     * 确认采购完成功能
+     * @param doneVo
+     * @return
+     */
+    @RequestMapping("/done")
+    public R done(@RequestBody  DoneVo doneVo){
+        purchaseService.done(doneVo);
+        return R.ok();
+
+    }
+    /**
+     * 接收采购功能
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/received")
+    //@RequiresPermissions("ware:purchase:update")
+    public R received(@RequestBody List<Long> ids){
+        purchaseService.received(ids);
+
+        return R.ok();
+    }
+    /**
+     * 合并未分配的采购单
+     * @param mergeVo
+     * @return
+     */
+    @RequestMapping("/merge")
+    //@RequiresPermissions("ware:purchase:list")
+    public R mergelist(@RequestBody MergeVo mergeVo){
+        purchaseService.mergePurchase(mergeVo);
+        return R.ok();
+    }
+
+    /**
+     * 查询未分配的采购单
+     * @param params
+     * @return
+     */
+    @RequestMapping("/unreceive/list")
+    //@RequiresPermissions("ware:purchase:list")
+    public R unreceivelist(@RequestParam Map<String, Object> params){
+        PageUtils page = purchaseService.queryPageUnreceive(params);
+
+        return R.ok().put("page", page);
+    }
 
     /**
      * 列表
@@ -60,6 +112,8 @@ public class PurchaseController {
     @RequestMapping("/save")
     //@RequiresPermissions("ware:purchase:save")
     public R save(@RequestBody PurchaseEntity purchase){
+        purchase.setCreateTime(new Date());
+        purchase.setUpdateTime(new Date());
 		purchaseService.save(purchase);
 
         return R.ok();

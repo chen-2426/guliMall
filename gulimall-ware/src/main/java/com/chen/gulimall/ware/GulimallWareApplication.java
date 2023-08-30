@@ -1,4 +1,4 @@
-package com.chen.gulimall;
+package com.chen.gulimall.ware;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,11 +7,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.chen.gulimall.member.feign")
-public class GulimallMemberApplication {
+@EnableFeignClients("com.chen.gulimall.ware.feign")
+public class GulimallWareApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GulimallMemberApplication.class, args);
+        SpringApplication.run(GulimallWareApplication.class, args);
     }
 
 }

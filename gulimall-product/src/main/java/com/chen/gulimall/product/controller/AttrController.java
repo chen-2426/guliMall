@@ -1,11 +1,14 @@
 package com.chen.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.chen.gulimall.product.VO.AttrRespVO;
 import com.chen.gulimall.product.VO.AttrVO;
+import com.chen.gulimall.product.entity.ProductAttrValueEntity;
+import com.chen.gulimall.product.service.ProductAttrValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +35,21 @@ import com.chen.gulimall.base.utils.R;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+    @Autowired
+    ProductAttrValueService productAttrValueService;
+
+
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/base/listforspu/{spuId}")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:list")
+    public R baseAttrlistforSpu(@PathVariable("spuId") Long spuId){
+        List<ProductAttrValueEntity> entities = productAttrValueService.baseAttrlistforspu(spuId);
+
+        return R.ok().put("data", entities);
+    }
 
     /**
      * 列表
@@ -84,7 +102,13 @@ public class AttrController {
 
         return R.ok();
     }
-
+//    /
+    @RequestMapping("/product/attr/update/{spuId}")
+    //@RequiresPermissions("com.chen.gulimail.product.com:attr:update")
+    public R update(@PathVariable("spuId") Long spuId,@RequestBody List<ProductAttrValueEntity> attrs){
+        productAttrValueService.updateSpuAttr(spuId,attrs);
+        return R.ok();
+    }
     /**
      * 删除
      */

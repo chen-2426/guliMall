@@ -1,4 +1,4 @@
-package com.chen.gulimall;
+package com.chen.gulimall.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
