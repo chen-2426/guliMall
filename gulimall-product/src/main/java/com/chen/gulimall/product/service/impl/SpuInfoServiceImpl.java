@@ -39,8 +39,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("spuInfoService")
 public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> implements SpuInfoService {
     @Autowired
-    SpuInfoService spuInfoService;
-    @Autowired
     SpuInfoDescService spuInfoDescService;
     @Autowired
     SpuImagesService spuImagesService;
@@ -225,7 +223,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         List<SkuInfoEntity> skuInfoEntities = skuInfoService.getSkusBySpuId(spuId);
         List<Long> skuids = skuInfoEntities.stream().map(entity -> entity.getSkuId()).collect(Collectors.toList());
         //todo  品牌名字信息  一个spu一个品牌，所以可共用
-        SpuInfoEntity spu = spuInfoService.getById(spuId);
+        SpuInfoEntity spu = this.getById(spuId);
         Long catalogId = spu.getCatalogId();
         CategoryEntity category = categoryService.getById(catalogId);
         Long brandId = spu.getBrandId();
