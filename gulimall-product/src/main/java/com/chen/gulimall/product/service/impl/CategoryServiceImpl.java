@@ -9,6 +9,9 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,7 @@ import com.chen.gulimall.base.utils.Query;
 import com.chen.gulimall.product.dao.CategoryDao;
 import com.chen.gulimall.product.entity.CategoryEntity;
 import com.chen.gulimall.product.service.CategoryService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 
@@ -81,12 +85,32 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      * @param category
      */
     @Override
+    @Transactional
+    @Caching(evict = {//同时进行多种缓存操作
+            @CacheEvict(value = "category",key = "'getLevel1Categorys'") //缓存失效模式
+    })
+
     public void updateCascade(CategoryEntity category) {
         updateById(category);
         categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());
     }
 
+    /**
+     * cacheable的默认行为
+     *  缓存中有，方法默认不调用
+     *  key默认自动生成：缓存名字::SimpleKey[](自动生成的key值)
+     *  缓存内容默认自动序列化（jdk的序列化机制）
+     *  TTL默认时间为 -1
+     *
+     *  自定义 指定key，  key属性，SpEl表达式 详情间 api Doc 使用字符串需要单引号包裹
+     *        指定时间， 配置文件中修改
+     *        数据存为json
+     *  常规数据可用springcache，但是特殊数据要特殊设计
+     * @return
+     */
     @Override
+    //sync 同步模式，相当于加锁
+    @Cacheable(value = {"category"},key = "#root.method.name",sync = true) //将结果存入缓存，缓存中有则不调用方法，无则调用方法，并放入缓存
     public List<CategoryEntity> getLevel1Categorys() {
         List<CategoryEntity> list = this.list(new QueryWrapper<CategoryEntity>().eq("parent_cid", 0));
         return list;
