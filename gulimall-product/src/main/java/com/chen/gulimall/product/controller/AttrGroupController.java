@@ -82,7 +82,7 @@ public class AttrGroupController {
     @RequestMapping("/{catelogId}/withattr")
     //@RequiresPermissions("com.chen.gulimail.product.com:attrgroup:info")
     public R getwithattr(@PathVariable("catelogId") Long catelogId){
-        List<AttrGroupWithAttrVO> attrGroup = attrGroupService.getWithAttrById(catelogId);
+        List<AttrGroupWithAttrVO> attrGroup = attrGroupService.getWithAttrByCatelogId(catelogId);
         return R.ok().put("data", attrGroup);
     }
 
