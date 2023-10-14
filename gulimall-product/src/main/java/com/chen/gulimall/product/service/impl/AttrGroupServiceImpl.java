@@ -1,9 +1,9 @@
 package com.chen.gulimall.product.service.impl;
 
 import com.chen.gulimall.product.VO.AttrGroupWithAttrVO;
-import com.chen.gulimall.product.VO.AttrVO;
+import com.chen.gulimall.product.VO.Web.SkuItemVO;
+import com.chen.gulimall.product.VO.Web.SpuItemAttrGroupVo;
 import com.chen.gulimall.product.dao.AttrAttrgroupRelationDao;
-import com.chen.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.chen.gulimall.product.entity.AttrEntity;
 import com.chen.gulimall.product.service.AttrService;
 import org.apache.commons.lang.StringUtils;
@@ -34,6 +34,8 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
     AttrAttrgroupRelationDao attrAttrgroupRelationDao;
     @Autowired
     AttrService attrService;
+    @Autowired
+    AttrGroupDao attrGroupDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -69,7 +71,7 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
      * @return
      */
     @Override
-    public List<AttrGroupWithAttrVO>  getWithAttrById(Long catelogId) {
+    public List<AttrGroupWithAttrVO>  getWithAttrByCatelogId(Long catelogId) {
         //查询分组
         QueryWrapper<AttrGroupEntity> queryWrapper = new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catelogId);
         List<AttrGroupEntity> list = this.list(queryWrapper);
@@ -86,6 +88,11 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         return res;
     }
 
+    @Override
+    public List<SpuItemAttrGroupVo> getWithAttrBySpuId(Long spuId, Long catalogId) {
+        List<SpuItemAttrGroupVo>  res = attrGroupDao.getAttrGroupWithAttrsBySpuId(spuId,catalogId);
+        return res;
+    }
 
 
 }

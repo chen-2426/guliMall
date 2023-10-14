@@ -1,7 +1,7 @@
 package com.chen.gulimall.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.chen.gulimall.base.utils.ProductConstant;
+import com.chen.gulimall.base.Constant.ProductConstant;
 import com.chen.gulimall.product.VO.AttrRespVO;
 import com.chen.gulimall.product.VO.AttrVO;
 import com.chen.gulimall.product.dao.AttrAttrgroupRelationDao;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

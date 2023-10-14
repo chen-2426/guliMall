@@ -1,6 +1,6 @@
 package com.chen.gulimall.ware.service.impl;
 
-import com.chen.gulimall.base.utils.WareConstant;
+import com.chen.gulimall.base.Constant.WareConstant;
 import com.chen.gulimall.ware.VO.DoneVo;
 import com.chen.gulimall.ware.VO.MergeVo;
 import com.chen.gulimall.ware.VO.itemDoneVo;

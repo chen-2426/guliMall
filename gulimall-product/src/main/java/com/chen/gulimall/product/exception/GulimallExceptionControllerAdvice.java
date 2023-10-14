@@ -1,6 +1,6 @@
 package com.chen.gulimall.product.exception;
 
-import com.chen.gulimall.base.exception.BizCodeEume;
+import com.chen.gulimall.base.exception.BizCodeEnum;
 import com.chen.gulimall.base.utils.R;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,11 +26,11 @@ public class GulimallExceptionControllerAdvice {
             String field = item.getField();
             map.put(field, defaultMessage);
         });
-        return R.error(BizCodeEume.VAILD_EXCEPTION.getCode(), BizCodeEume.VAILD_EXCEPTION.getMessage()).put("data", map);
+        return R.error(BizCodeEnum.VAILD_EXCEPTION.getCode(), BizCodeEnum.VAILD_EXCEPTION.getMessage()).put("data", map);
     }
 
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable e) {
-        return R.error(BizCodeEume.UNKNOW_EXCEPTION.getCode(), BizCodeEume.UNKNOW_EXCEPTION.getMessage());
+        return R.error(BizCodeEnum.UNKNOW_EXCEPTION.getCode(), BizCodeEnum.UNKNOW_EXCEPTION.getMessage());
     }
 }

@@ -61,7 +61,11 @@
             <artifactId>redisson</artifactId>
             <version>3.23.4</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--        <dependency>-->
 <!--            <groupId>com.aliyun.oss</groupId>-->
 <!--            <artifactId>aliyun-sdk-oss</artifactId>-->

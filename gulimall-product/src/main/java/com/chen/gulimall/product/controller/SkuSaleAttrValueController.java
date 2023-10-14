@@ -1,6 +1,7 @@
 package com.chen.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,6 +43,12 @@ public class SkuSaleAttrValueController {
         return R.ok().put("page", page);
     }
 
+    @RequestMapping("/stringList/{Skuid}")
+    //@RequiresPermissions("com.chen.gulimail.product.com:skusaleattrvalue:info")
+    public List<String> stringList(@PathVariable("Skuid") Long id){
+        List<String> List = skuSaleAttrValueService.getStringListById(id);
+        return List;
+    }
 
     /**
      * 信息

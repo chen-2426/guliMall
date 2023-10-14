@@ -1,12 +1,10 @@
 package com.chen.gulimall.product.service.impl;
 
 import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.chen.gulimall.base.TO.SkuReductionTo;
 import com.chen.gulimall.base.TO.SpuBoundsTo;
 import com.chen.gulimall.base.TO.es.SkuEsModel;
-import com.chen.gulimall.base.utils.ProductConstant;
+import com.chen.gulimall.base.Constant.ProductConstant;
 import com.chen.gulimall.base.utils.R;
 import com.chen.gulimall.product.VO.*;
 import com.chen.gulimall.product.entity.*;
@@ -15,7 +13,6 @@ import com.chen.gulimall.product.feign.SearchFeignService;
 import com.chen.gulimall.product.feign.WareFeignService;
 import com.chen.gulimall.product.service.*;
 import org.apache.commons.lang.StringUtils;
-import org.aspectj.lang.annotation.After;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

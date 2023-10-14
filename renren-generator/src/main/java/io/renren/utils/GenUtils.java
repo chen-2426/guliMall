@@ -321,8 +321,8 @@ public class GenUtils {
             return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
-        if (template.contains("Controller.java.vm")) {
-            return packagePath + "controller" + File.separator + className + "Controller.java";
+        if (template.contains("controller.java.vm")) {
+            return packagePath + "controller" + File.separator + className + "controller.java";
         }
 
         if (template.contains("Dao.xml.vm")) {

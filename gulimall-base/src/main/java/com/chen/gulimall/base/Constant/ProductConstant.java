@@ -1,4 +1,4 @@
-package com.chen.gulimall.base.utils;
+package com.chen.gulimall.base.Constant;
 
 import lombok.AllArgsConstructor;
 
