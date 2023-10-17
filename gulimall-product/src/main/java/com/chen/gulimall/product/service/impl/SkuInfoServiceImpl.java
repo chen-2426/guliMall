@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -128,6 +129,11 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         CompletableFuture.allOf(imagesFuture,saleAttrVosFuture,SpuinfoFuture,attrsFuture).get();
 
         return skuItemVO;
+    }
+
+    @Override
+    public BigDecimal getPrice(Long skuId) {
+        return this.getById(skuId).getPrice();
     }
 
 }

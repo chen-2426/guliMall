@@ -5,6 +5,7 @@ import com.chen.gulimall.base.utils.PageUtils;
 import com.chen.gulimall.product.VO.Web.SkuItemVO;
 import com.chen.gulimall.product.entity.SkuInfoEntity;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -25,5 +26,7 @@ public interface SkuInfoService extends IService<SkuInfoEntity> {
     List<SkuInfoEntity> getSkusBySpuId(Long spuId);
 
     SkuItemVO item(Long skuId) throws ExecutionException, InterruptedException;
+
+    BigDecimal getPrice(Long skuId);
 }
 
