@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.chen.gulimall.base.Constant.AuthServerConstant;
 import com.chen.gulimall.base.VO.MemberRespVo;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,14 @@ public class LoginUserInterceptor implements HandlerInterceptor {
     public static ThreadLocal<MemberRespVo> loginUser= new ThreadLocal();
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //方便服务之间调用
+        String requestURI = request.getRequestURI();
+        boolean match = new AntPathMatcher().match("/order/order/status/**", requestURI);
+        if(match){
+            return true;
+        }
+
+
         MemberRespVo attribute = (MemberRespVo)request.getSession().getAttribute(AuthServerConstant.LOGIN_USER);
         if(attribute!=null){
             loginUser.set(attribute);
