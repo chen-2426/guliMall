@@ -1,4 +1,4 @@
-package com.chen.gulimall.order.vo;
+package com.chen.gulimall.order.TO;
 
 import com.chen.gulimall.order.entity.OrderEntity;
 import com.chen.gulimall.order.entity.OrderItemEntity;
