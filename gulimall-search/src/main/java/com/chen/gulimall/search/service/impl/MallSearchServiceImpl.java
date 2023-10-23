@@ -29,6 +29,9 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 import org.elasticsearch.search.sort.SortOrder;
 
@@ -45,6 +48,8 @@ import java.util.stream.Collectors;
  * @date 2023/9/4 18:37
  * @description
  */
+@EnableScheduling  //开启定时任务 对应定时任务 @Scheduled
+@EnableAsync //开启异步功能 对应异步执行方法 @Async
 @Service
 public class MallSearchServiceImpl implements MallSearchService {
     @Autowired

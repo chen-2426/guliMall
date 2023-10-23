@@ -26,7 +26,7 @@ public class MyRedissonConfig {
     RedissonClient redisson() throws IOException {
         Config config = new Config();
         config.useSingleServer()
-                .setAddress("rediss://8.130.64.110");
+                .setAddress("redis://8.130.64.110");
 
         return Redisson.create(config);
     }
