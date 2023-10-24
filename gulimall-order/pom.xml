@@ -64,6 +64,10 @@
             <artifactId>alipay-sdk-java</artifactId>
             <version>4.38.105.ALL</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

@@ -2,17 +2,17 @@ package com.chen.gulimall.order.service.impl;
 
 import com.chen.gulimall.base.Constant.CartConstant;
 import com.chen.gulimall.base.VO.MemberRespVo;
+import com.chen.gulimall.order.TO.OrderCreateTo;
+import com.chen.gulimall.order.TO.SeckillOrderTo;
 import com.chen.gulimall.order.constant.OrderConstant;
 import com.chen.gulimall.order.entity.OrderItemEntity;
 import com.chen.gulimall.order.feign.CartFeign;
 import com.chen.gulimall.order.feign.MemberFeign;
 import com.chen.gulimall.order.interceptor.LoginUserInterceptor;
 import com.chen.gulimall.order.vo.*;
-import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -202,6 +202,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
             BeanUtils.copyProperties(newOrderEntity,orderTo);
             rabbitTemplate.convertAndSend("order-event-exchange", "order.release.other",orderTo);
         }
+    }
+
+    @Override
+    public void CreateSeckillOrder(SeckillOrderTo order) {
+        
     }
 //    @GlobalTransactional
 //    @Transactional
